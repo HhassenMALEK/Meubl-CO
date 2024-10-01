@@ -1,88 +1,44 @@
-# projet-collectif-plateforme-de-vente-de-meubles-meubl-co
-Création d'un site E-commerce MEUBL&CO : plateforme de vente collaborative de meubles de seconde main. 
-Projet en équipe de 6 personnes sur 7 jours.
+# Plateforme de Vente de Meubles
 
-# DOCUMENTATION POUR LE BACK
+Bienvenue sur la plateforme de vente de meubles, un projet conçu avec Symfony pour le back-end et React pour le front-end. Cette application permet aux utilisateurs de parcourir, rechercher et acheter des meubles via une interface moderne et réactive.
 
-I. INSTALLER PHP : https://www.php.net/manual/fr/install.php
+## Fonctionnalités
 
-Sur MacOs,  et Linux télecharger avec Homebrew https://brew.sh/
+- 🛋️ **Navigation et recherche de meubles**
 
-II. INSTALLER COMPOSER, ici c'est detaillé pour tous les systemes, il faut faire l'installation GLOBALE (c'est indique sur la doc)
+## Technologies Utilisées
 
-https://getcomposer.org/doc/00-intro.md
+- **Back-end** : Symfony
+- **Front-end** : React
+- **Base de données** : MySQL
+- **Autres** : Apache, phpMyAdmin, Composer, Node.js, NPM
 
+## Communication entre Technologies
 
-III. INSTALLER SYMFONY
-
-
-https://symfony.com/download 
-
-Debian/Ubuntu — APT based Linux
-
-curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
-sudo apt install symfony-cli
+- **API RESTful** : Symfony expose des endpoints API RESTful permettant au front-end de communiquer avec le back-end pour les opérations CRUD.
+- **Base de données** : MySQL stocke les données de manière structurée.
+- **Gestion des dépendances** : Composer gère les dépendances PHP, tandis que Node.js et NPM gèrent les bibliothèques JavaScript.
 
 
-Pour MacOs
+## Configuration Mise en Place
 
-1) Homebrew: install Homebrew https://brew.sh/
-2) brew install symfony-cli/tap/symfony-cli
+Pour configurer l'environnement de développement, voici les étapes que j'ai mises en place :
 
-Pour Windows
-1) Installer Chocolatey (il faut s'inscire pour le telecharger)https://chocolatey.org/install c'est un gestionnaire de paquets qui va installer Symfony ou scoop, celui cité dans la doc Symfony: Scoop install Scoop
-scoop install symfony-cli
+1. **Installation d'Apache** : Le serveur web Apache a été configuré pour gérer les requêtes HTTP de l'application.
+2. **Installation de MySQL** : MySQL a été installé pour gérer les données de manière structurée.
+3. **phpMyAdmin** : J'ai ensuite installé phpMyAdmin pour permettre la gestion des bases de données via une interface web plus intuitive.
+4. **Installation de PHP** : PHP et ses extensions, notamment php-mysql, ont été installés pour garantir la compatibilité avec Symfony.
+5. **Installation de Composer** : J'ai installé Composer pour gérer les dépendances PHP et faciliter le téléchargement des bibliothèques nécessaires.
+6. **Installation de Symfony** : Symfony a été installé en tant que framework principal pour le développement du back-end de l'application.
+7. **Installation de Node.js et NPM** : Pour gérer les dépendances front-end, j'ai installé Node.js et NPM afin de prendre en charge le développement en React.
+8. **Création du projet Symfony** : J'ai initialisé le projet Symfony et configuré le répertoire du projet pour le développement.
 
+### Architecture et Communication entre les Technologies
 
-Vous pouvez Telecharger PHP STORM si vous voulez comme IDE, vous pouvez avoir la licence gratuite (pack etudiant Jet Brains) avec votre adresse mail de lovelace
+Symfony a été utilisé comme framework backend pour gérer la logique côté serveur, simplifiant ainsi la gestion des données en utilisant des objets PHP. Des entités ont été créées en PHP pour représenter les données et leurs relations, et Symfony a utilisé ces entités pour générer automatiquement la structure de la base de données. 
 
-IV. TUTOS
+Pour permettre à ReactJS de récupérer ces données, Symfony a exposé une API via des endpoints spécifiques (URLs) configurés pour répondre à différentes actions, telles que la récupération de la liste des produits. Dans ReactJS, l'API Fetch a été employée pour envoyer des requêtes HTTP vers ces endpoints Symfony. Les données JSON renvoyées par Symfony ont ensuite été traitées et affichées dynamiquement dans l'interface utilisateur de ReactJS.
 
-OFFICIELLE Symfony (for Dummies) tutos video : https://symfonycasts.com/
-On conseille les chapitres 1, 2, 3 et 8
-
-GRAFIKART
-https://grafikart.fr/tutoriels/installation-symfony-2180#autoplay
-On conseille fortement de gagner du temps, en regardant ces chapitres d'abord
-Decouverte
-Installation
-premieres pages
-L ORM doctrine
-ORM relation ManyToONe si on veux faire des tables relationnelles
-Creer une API : le serializer, et suivre les autres si vous voulez aller plus loin
-
-PROJET
-
-voici la doc officiele
-https://symfony.com/doc/current/setup.html
+Pour la partie frontend, l'interface dynamique a été conçue en utilisant React pour développer des composants interactifs. Les routes ont été mises en place pour faciliter la navigation entre les différentes pages de l'application. Bootstrap a été intégré afin d'assurer un design attractif.
 
 
-
-Dans le terminal, va dans le dossier où est le projet, ecris cette ligne de commande :
-
-$ composer require webapp
-
-et verifie que ton environement de travail est pret avec: 
-
-$ symfony check:requirements
-
-ATTENTION le serveur XAMPP, LAMP, WAMP, MAMP doivent etre allumes pour faire tourner la base de donnes, mais il est inutile
-de mettre le projet dans htdocs.
-
-ouvrir le projet, et sur le terminal, allumer le serveur
-
-$ symfony server:start
-
-
-INSTALLER ADMINEREVO pour visualiser les bases de donnees, c'est un gestionnaire de basses de donnes GDBD
-
-en français : https://download.adminerevo.org/4.8.4/adminer/adminer-mysql-fr.zip
-
-une fois téléchargé, le deziper, copier/coller dans  le dossier public du projet,  et le renommer adminer.php  avec l'explorateur de fichiers.
-
-
-NOTE : pour les problèmes de CORS (multisources otigins), il faut installer le bundle nelmio par comoser tel que :
-composer require nelmio/cors-bundle
---> une fois installer s'assurer d'avoir sur votre Symfony votre fichier composer.json la ligne synfony/flex 
-  - si oui, votre congiguration avec CORS gérés est fonctionnelle (plus besoin du plugins navigateurs anti-CORS) (documentations: https://github.com/nelmio/NelmioCorsBundle)
-  - si non, vous trouvez cette ligne symfony/symfony, vous devez installer symfony/flex tel que : https://symfony.com/doc/current/setup/flex.html (suivre cette documentation)
